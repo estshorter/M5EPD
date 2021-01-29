@@ -43,7 +43,7 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
     delay(100);
 
     enableEXTPower();
-    // enableEPDPower();
+    enableEPDPower();
     delay(1000);
 
     // EPD.begin(M5EPD_SCK_PIN, M5EPD_MOSI_PIN, M5EPD_MISO_PIN, M5EPD_CS_PIN, M5EPD_BUSY_PIN);
