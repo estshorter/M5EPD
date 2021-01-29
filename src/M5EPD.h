@@ -11,8 +11,8 @@
 #include "utility/BM8563.h"
 #include "utility/SHT3x.h"
 
-#include "M5EPD_Canvas.h"
-#include "M5EPD_Driver.h"
+// #include "M5EPD_Canvas.h"
+// #include "M5EPD_Driver.h"
 
 #include "esp_adc_cal.h"
 
@@ -43,8 +43,8 @@ public:
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
     void disableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 0); }
-    void enableEPDPower() { digitalWrite(M5EPD_EPD_PWR_EN_PIN, 1); }
-    void disableEPDPower() { digitalWrite(M5EPD_EPD_PWR_EN_PIN, 0); }
+    // void enableEPDPower() { digitalWrite(M5EPD_EPD_PWR_EN_PIN, 1); }
+    // void disableEPDPower() { digitalWrite(M5EPD_EPD_PWR_EN_PIN, 0); }
     void enableMainPower() { digitalWrite(M5EPD_MAIN_PWR_PIN, 1); }
     void disableMainPower() { digitalWrite(M5EPD_MAIN_PWR_PIN, 0); }
     void BatteryADCBegin();
@@ -52,15 +52,15 @@ public:
     uint32_t getBatteryVoltage();
 
     void shutdown();
-    int shutdown( int seconds );
-    int shutdown( const rtc_time_t &RTC_TimeStruct);
-    int shutdown( const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct);
+    int shutdown(int seconds);
+    int shutdown(const rtc_time_t &RTC_TimeStruct);
+    int shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct);
 
     Button BtnL = Button(M5EPD_KEY_LEFT_PIN, true, 10);
     Button BtnP = Button(M5EPD_KEY_PUSH_PIN, true, 10);
     Button BtnR = Button(M5EPD_KEY_RIGHT_PIN, true, 10);
 
-    M5EPD_Driver EPD = M5EPD_Driver();
+    // M5EPD_Driver EPD = M5EPD_Driver();
     GT911 TP = GT911();
     BM8563 RTC = BM8563();
     SHT3x SHT30 = SHT3x();

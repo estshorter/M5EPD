@@ -5,9 +5,8 @@
 
 #define BAT_ADC_CHANNEL ADC1_GPIO35_CHANNEL
 #define BASE_VOLATAGE 3600
-#define SCALE 0.5//0.78571429
+#define SCALE 0.5 //0.78571429
 #define ADC_FILTER_SAMPLE 8
-
 
 M5EPD::M5EPD()
 {
@@ -44,10 +43,10 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
     delay(100);
 
     enableEXTPower();
-    enableEPDPower();
+    // enableEPDPower();
     delay(1000);
 
-    EPD.begin(M5EPD_SCK_PIN, M5EPD_MOSI_PIN, M5EPD_MISO_PIN, M5EPD_CS_PIN, M5EPD_BUSY_PIN);
+    // EPD.begin(M5EPD_SCK_PIN, M5EPD_MOSI_PIN, M5EPD_MISO_PIN, M5EPD_CS_PIN, M5EPD_BUSY_PIN);
 
     if (SDEnable == true)
     {
@@ -57,7 +56,7 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
 
     if (touchEnable == true)
     {
-        if(TP.begin(21, 22, 36) != ESP_OK)
+        if (TP.begin(21, 22, 36) != ESP_OK)
         {
             log_e("Touch pad initialization failed.");
         }
@@ -67,7 +66,7 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
         Wire.begin(21, 22, 400000);
     }
 
-    if(BatteryADCEnable == true)
+    if (BatteryADCEnable == true)
     {
         BatteryADCBegin();
     }
@@ -82,7 +81,7 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
   */
 void M5EPD::BatteryADCBegin()
 {
-    if(_is_adc_start)
+    if (_is_adc_start)
     {
         return;
     }
@@ -151,11 +150,10 @@ int M5EPD::shutdown(const rtc_time_t &RTC_TimeStruct)
 int M5EPD::shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct)
 {
     RTC.clearIRQ();
-    RTC.setAlarmIRQ(RTC_DateStruct,RTC_TimeStruct);
+    RTC.setAlarmIRQ(RTC_DateStruct, RTC_TimeStruct);
     delay(10);
     this->disableMainPower();
     return 0;
 }
-
 
 M5EPD M5;
