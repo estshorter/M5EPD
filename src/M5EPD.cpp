@@ -14,7 +14,7 @@ M5EPD::M5EPD() : _is_adc_start(false), _isInited(false), _adc_chars(nullptr)
 
 /** @brief Initialize the power supply, screen and other peripherals
   */
-void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable, bool ThermoEnable)
+void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable)
 {
     if (_isInited)
     {
@@ -77,11 +77,6 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
     if (RtcEnable == true)
     {
         RTC.begin();
-    }
-
-    if (ThermoEnable == true)
-    {
-        SHT30.Begin();
     }
 }
 

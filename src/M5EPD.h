@@ -9,7 +9,7 @@
 #include "utility/Button.h"
 #include "utility/GT911.h"
 #include "utility/BM8563.h"
-#include "utility/SHT3x.h"
+// #include "utility/SHT3x.h"
 
 // #include "M5EPD_Canvas.h"
 // #include "M5EPD_Driver.h"
@@ -39,7 +39,7 @@ class M5EPD
 {
 public:
     M5EPD();
-    void begin(bool touchEnable = true, bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true, bool ThermoEnable = true);
+    void begin(bool touchEnable = true, bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true);
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
     void disableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 0); }
@@ -63,7 +63,7 @@ public:
     // M5EPD_Driver EPD = M5EPD_Driver();
     GT911 TP = GT911();
     BM8563 RTC = BM8563();
-    SHT3x SHT30 = SHT3x();
+    // SHT3x SHT30 = SHT3x();
 
 private:
     bool _is_adc_start;
