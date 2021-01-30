@@ -1,6 +1,7 @@
 #include "M5EPD.h"
 #include "driver/gpio.h"
 #include "driver/adc.h"
+#include "esp_adc_cal.h"
 #include "soc/adc_channel.h"
 
 #define BAT_ADC_CHANNEL ADC1_GPIO35_CHANNEL
@@ -44,21 +45,12 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
     enableEPDPower();
     delay(1000);
 
-    // EPD.begin(M5EPD_SCK_PIN, M5EPD_MOSI_PIN, M5EPD_MISO_PIN, M5EPD_CS_PIN, M5EPD_BUSY_PIN);
-
     if (SDEnable == true)
     {
         SPI.begin(14, 13, 12, 4);
         SD.begin(4, SPI, 20000000);
     }
 
-    // if (touchEnable == true)
-    // {
-    //     if (TP.begin(21, 22, 36) != ESP_OK)
-    //     {
-    //         log_e("Touch pad initialization failed.");
-    //     }
-    // }
     if (I2CEnable == true || RtcEnable == true)
     {
         Wire.begin(21, 22, 400000);

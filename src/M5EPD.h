@@ -3,17 +3,9 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include <SPI.h>
-#include "FS.h"
 #include "SD.h"
-// #include "utility/Button.h"
-// #include "utility/GT911.h"
 #include "utility/BM8563.h"
 #include <ezButton.h>
-// #include "utility/SHT3x.h"
-
-// #include "M5EPD_Canvas.h"
-// #include "M5EPD_Driver.h"
 
 #include "esp_adc_cal.h"
 
@@ -61,10 +53,7 @@ public:
     ezButton BtnP = ezButton(M5EPD_KEY_PUSH_PIN);
     ezButton BtnR = ezButton(M5EPD_KEY_RIGHT_PIN);
 
-    // M5EPD_Driver EPD = M5EPD_Driver();
-    // GT911 TP = GT911();
     BM8563 RTC = BM8563(Wire);
-    // SHT3x SHT30 = SHT3x();
 
 private:
     bool _is_adc_start;
