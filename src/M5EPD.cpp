@@ -9,10 +9,6 @@
 #define SCALE 0.5 //0.78571429
 #define ADC_FILTER_SAMPLE 8
 
-M5EPD::M5EPD() : _is_adc_start(false), _isInited(false), _adc_chars(nullptr)
-{
-}
-
 /** @brief Initialize the power supply, screen and other peripherals
   */
 void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable)
@@ -125,6 +121,7 @@ void M5EPD::shutdown()
 {
     this->disableMainPower();
 }
+
 int M5EPD::shutdown(int seconds)
 {
     RTC.clearIRQ();
@@ -133,6 +130,7 @@ int M5EPD::shutdown(int seconds)
     this->disableMainPower();
     return 0;
 }
+
 int M5EPD::shutdown(const rtc_time_t &RTC_TimeStruct)
 {
     RTC.clearIRQ();

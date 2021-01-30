@@ -31,7 +31,7 @@
 class M5EPD
 {
 public:
-    M5EPD();
+    M5EPD() : _is_adc_start(false), _isInited(false), _adc_chars(nullptr){};
     void begin(bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true);
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
