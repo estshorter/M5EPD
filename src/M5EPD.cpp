@@ -7,18 +7,19 @@
 
 #define BAT_ADC_CHANNEL ADC1_GPIO35_CHANNEL
 #define BASE_VOLATAGE 3600
-#define SCALE 0.5 //0.78571429
+// #define SCALE 0.5
+#define SCALE_INV 2
 #define ADC_FILTER_SAMPLE 8
 
 /** @brief Initialize the power supply, screen and other peripherals
   */
-void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable)
+void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RTCEnable)
 {
-    if (_isInited)
+    if (_is_initialized)
     {
         return;
     }
-    _isInited = true;
+    _is_initialized = true;
 
     pinMode(M5EPD_MAIN_PWR_PIN, OUTPUT);
     enableMainPower();
@@ -48,7 +49,7 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
         SD.begin(4, SPI, 20000000);
     }
 
-    if (I2CEnable == true || RtcEnable == true)
+    if (I2CEnable == true || RTCEnable == true)
     {
         Wire.begin(21, 22, 400000);
     }
@@ -63,7 +64,7 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
         Serial.println("OK");
     }
 
-    if (RtcEnable == true)
+    if (RTCEnable == true)
     {
         RTC.begin();
     }
@@ -73,14 +74,14 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
   */
 void M5EPD::BatteryADCBegin()
 {
-    if (_is_adc_start)
+    if (_is_adc_initialized)
     {
         return;
     }
-    _is_adc_start = true;
+    _is_adc_initialized = true;
     adc1_config_width(ADC_WIDTH_BIT_12);
     adc1_config_channel_atten(BAT_ADC_CHANNEL, ADC_ATTEN_DB_11);
-    _adc_chars = (esp_adc_cal_characteristics_t *)calloc(1, sizeof(esp_adc_cal_characteristics_t));
+    _adc_chars = static_cast<esp_adc_cal_characteristics_t *>(calloc(1, sizeof(esp_adc_cal_characteristics_t)));
     esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, BASE_VOLATAGE, _adc_chars);
 }
 
@@ -98,13 +99,13 @@ uint32_t M5EPD::getBatteryRaw()
 uint32_t M5EPD::getBatteryVoltage()
 {
     uint32_t adc_raw_value = 0;
-    for (uint16_t i = 0; i < ADC_FILTER_SAMPLE; i++)
+    for (uint_fast16_t i = 0; i < ADC_FILTER_SAMPLE; i++)
     {
         adc_raw_value += adc1_get_raw(BAT_ADC_CHANNEL);
     }
 
     adc_raw_value = adc_raw_value / ADC_FILTER_SAMPLE;
-    uint32_t voltage = (uint32_t)(esp_adc_cal_raw_to_voltage(adc_raw_value, _adc_chars) / SCALE);
+    uint32_t voltage = static_cast<uint32_t>(esp_adc_cal_raw_to_voltage(adc_raw_value, _adc_chars) * SCALE_INV);
     return voltage;
 }
 

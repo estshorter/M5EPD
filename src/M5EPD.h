@@ -33,8 +33,15 @@
 class M5EPD
 {
 public:
-    M5EPD() : _is_adc_start(false), _isInited(false), _adc_chars(nullptr){};
-    void begin(bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true);
+    M5EPD() : _is_adc_initialized(false), _is_initialized(false), _adc_chars(nullptr){};
+    ~M5EPD()
+    {
+        if (_adc_chars != nullptr)
+        {
+            free(_adc_chars);
+        }
+    }
+    void begin(bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RTCEnable = true);
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
     void disableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 0); }
@@ -58,8 +65,8 @@ public:
     BM8563 RTC = BM8563(Wire);
 
 private:
-    bool _is_adc_start;
-    bool _isInited;
+    bool _is_adc_initialized;
+    bool _is_initialized;
     esp_adc_cal_characteristics_t *_adc_chars;
 };
 
