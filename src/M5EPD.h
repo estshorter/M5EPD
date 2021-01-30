@@ -6,8 +6,8 @@
 #include <SPI.h>
 #include "FS.h"
 #include "SD.h"
-#include "utility/Button.h"
-#include "utility/GT911.h"
+// #include "utility/Button.h"
+// #include "utility/GT911.h"
 #include "utility/BM8563.h"
 #include <ezButton.h>
 // #include "utility/SHT3x.h"
@@ -40,7 +40,7 @@ class M5EPD
 {
 public:
     M5EPD();
-    void begin(bool touchEnable = true, bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true);
+    void begin(bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RtcEnable = true);
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
     void disableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 0); }
@@ -62,7 +62,7 @@ public:
     ezButton BtnR = ezButton(M5EPD_KEY_RIGHT_PIN);
 
     // M5EPD_Driver EPD = M5EPD_Driver();
-    GT911 TP = GT911();
+    // GT911 TP = GT911();
     BM8563 RTC = BM8563();
     // SHT3x SHT30 = SHT3x();
 

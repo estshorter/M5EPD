@@ -14,7 +14,7 @@ M5EPD::M5EPD() : _is_adc_start(false), _isInited(false), _adc_chars(nullptr)
 
 /** @brief Initialize the power supply, screen and other peripherals
   */
-void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable)
+void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RtcEnable)
 {
     if (_isInited)
     {
@@ -52,14 +52,14 @@ void M5EPD::begin(bool touchEnable, bool SDEnable, bool SerialEnable, bool Batte
         SD.begin(4, SPI, 20000000);
     }
 
-    if (touchEnable == true)
-    {
-        if (TP.begin(21, 22, 36) != ESP_OK)
-        {
-            log_e("Touch pad initialization failed.");
-        }
-    }
-    else if (I2CEnable == true)
+    // if (touchEnable == true)
+    // {
+    //     if (TP.begin(21, 22, 36) != ESP_OK)
+    //     {
+    //         log_e("Touch pad initialization failed.");
+    //     }
+    // }
+    if (I2CEnable == true)
     {
         Wire.begin(21, 22, 400000);
     }
