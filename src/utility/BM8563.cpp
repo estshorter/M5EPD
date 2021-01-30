@@ -96,6 +96,7 @@ void BM8563::getTime(rtc_time_t &time)
         buf[1] = Wire.read();
         buf[2] = Wire.read();
     }
+
     readTime(time, buf);
 }
 
@@ -271,4 +272,50 @@ void BM8563::disableIRQ()
     clearIRQ();
     uint8_t data = readReg(0x01);
     writeReg(0x01, data & 0xfC);
+}
+
+void BM8563::writeDate(const rtc_date_t &date)
+{
+    Wire.write(ByteToBcd2(date.day));
+    Wire.write(ByteToBcd2(date.week));
+
+    if (date.year < 2000)
+    {
+        Wire.write(ByteToBcd2(date.mon) | 0x80);
+    }
+    else
+    {
+        Wire.write(ByteToBcd2(date.mon) | 0x00);
+    }
+    Wire.write(ByteToBcd2((uint8_t)(date.year % 100)));
+}
+
+void BM8563::writeTime(const rtc_time_t &time)
+{
+    Wire.write(ByteToBcd2(time.sec));
+    Wire.write(ByteToBcd2(time.min));
+    Wire.write(ByteToBcd2(time.hour));
+}
+
+void BM8563::readTime(rtc_time_t &time, uint8_t *buf)
+{
+    time.sec = Bcd2ToByte(buf[0] & 0x7f);
+    time.min = Bcd2ToByte(buf[1] & 0x7f);
+    time.hour = Bcd2ToByte(buf[2] & 0x3f);
+}
+
+void BM8563::readDate(rtc_date_t &date, uint8_t *buf)
+{
+    date.day = Bcd2ToByte(buf[0] & 0x3f);
+    date.week = Bcd2ToByte(buf[1] & 0x07);
+    date.mon = Bcd2ToByte(buf[2] & 0x1f);
+
+    if (buf[2] & 0x80)
+    {
+        date.year = 1900 + Bcd2ToByte(buf[3] & 0xff);
+    }
+    else
+    {
+        date.year = 2000 + Bcd2ToByte(buf[3] & 0xff);
+    }
 }
