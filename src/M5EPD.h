@@ -45,9 +45,9 @@ public:
     uint32_t getBatteryVoltage();
 
     void shutdown();
-    int shutdown(int seconds);
-    int shutdown(const rtc_time_t &RTC_TimeStruct);
-    int shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct);
+    void shutdown(int seconds);
+    void shutdown(const rtc_time_t &RTC_TimeStruct);
+    void shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct);
 
     ezButton BtnL = ezButton(M5EPD_KEY_LEFT_PIN);
     ezButton BtnP = ezButton(M5EPD_KEY_PUSH_PIN);

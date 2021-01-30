@@ -122,31 +122,28 @@ void M5EPD::shutdown()
     this->disableMainPower();
 }
 
-int M5EPD::shutdown(int seconds)
+void M5EPD::shutdown(int seconds)
 {
     RTC.clearIRQ();
     RTC.setAlarmIRQ(seconds);
     delay(10);
     this->disableMainPower();
-    return 0;
 }
 
-int M5EPD::shutdown(const rtc_time_t &RTC_TimeStruct)
+void M5EPD::shutdown(const rtc_time_t &RTC_TimeStruct)
 {
     RTC.clearIRQ();
     RTC.setAlarmIRQ(RTC_TimeStruct);
     delay(10);
     this->disableMainPower();
-    return 0;
 }
 
-int M5EPD::shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct)
+void M5EPD::shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct)
 {
     RTC.clearIRQ();
     RTC.setAlarmIRQ(RTC_DateStruct, RTC_TimeStruct);
     delay(10);
     this->disableMainPower();
-    return 0;
 }
 
 M5EPD M5;
