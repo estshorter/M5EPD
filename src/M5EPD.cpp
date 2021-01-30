@@ -59,7 +59,7 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
     //         log_e("Touch pad initialization failed.");
     //     }
     // }
-    if (I2CEnable == true)
+    if (I2CEnable == true || RtcEnable == true)
     {
         Wire.begin(21, 22, 400000);
     }

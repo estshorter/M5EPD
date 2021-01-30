@@ -25,9 +25,9 @@ typedef struct RTC_Date
 class BM8563
 {
 public:
-    BM8563();
+    BM8563(TwoWire &theWire = Wire);
 
-    void begin(void);
+    void begin();
     void writeReg(uint8_t reg, uint8_t data);
     uint8_t readReg(uint8_t reg);
 
@@ -46,6 +46,7 @@ public:
     void disableIRQ();
 
 private:
+    TwoWire &_wire;
     uint8_t Bcd2ToByte(uint8_t Value);
     uint8_t ByteToBcd2(uint8_t Value);
     void writeDate(const rtc_date_t &date);

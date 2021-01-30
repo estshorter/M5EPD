@@ -63,7 +63,7 @@ public:
 
     // M5EPD_Driver EPD = M5EPD_Driver();
     // GT911 TP = GT911();
-    BM8563 RTC = BM8563();
+    BM8563 RTC = BM8563(Wire);
     // SHT3x SHT30 = SHT3x();
 
 private:
