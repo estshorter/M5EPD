@@ -3,11 +3,13 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-#include "SD.h"
-#include "utility/BM8563.h"
+#include <SD.h>
+
 #include <ezButton.h>
 
 #include "esp_adc_cal.h"
+
+#include "utility/BM8563.h"
 
 #define M5EPD_MAIN_PWR_PIN 2
 #define M5EPD_CS_PIN 15

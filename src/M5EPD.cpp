@@ -1,8 +1,9 @@
 #include "M5EPD.h"
-#include "driver/gpio.h"
-#include "driver/adc.h"
-#include "esp_adc_cal.h"
-#include "soc/adc_channel.h"
+
+#include <driver/gpio.h>
+#include <driver/adc.h>
+#include <esp_adc_cal.h>
+#include <soc/adc_channel.h>
 
 #define BAT_ADC_CHANNEL ADC1_GPIO35_CHANNEL
 #define BASE_VOLATAGE 3600
