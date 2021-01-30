@@ -9,6 +9,7 @@
 #include "utility/Button.h"
 #include "utility/GT911.h"
 #include "utility/BM8563.h"
+#include <ezButton.h>
 // #include "utility/SHT3x.h"
 
 // #include "M5EPD_Canvas.h"
@@ -56,9 +57,9 @@ public:
     int shutdown(const rtc_time_t &RTC_TimeStruct);
     int shutdown(const rtc_date_t &RTC_DateStruct, const rtc_time_t &RTC_TimeStruct);
 
-    Button BtnL = Button(M5EPD_KEY_LEFT_PIN, true, 10);
-    Button BtnP = Button(M5EPD_KEY_PUSH_PIN, true, 10);
-    Button BtnR = Button(M5EPD_KEY_RIGHT_PIN, true, 10);
+    ezButton BtnL = ezButton(M5EPD_KEY_LEFT_PIN);
+    ezButton BtnP = ezButton(M5EPD_KEY_PUSH_PIN);
+    ezButton BtnR = ezButton(M5EPD_KEY_RIGHT_PIN);
 
     // M5EPD_Driver EPD = M5EPD_Driver();
     GT911 TP = GT911();

@@ -124,9 +124,9 @@ uint32_t M5EPD::getBatteryVoltage()
 void M5EPD::update()
 {
     //Button update
-    BtnL.read();
-    BtnP.read();
-    BtnR.read();
+    BtnL.loop();
+    BtnP.loop();
+    BtnR.loop();
 }
 
 void M5EPD::shutdown()
