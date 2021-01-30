@@ -10,7 +10,7 @@ void BM8563::begin(void)
 
 void BM8563::writeReg(uint8_t reg, uint8_t data)
 {
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(reg);
     _wire.write(data);
     _wire.endTransmission();
@@ -18,10 +18,10 @@ void BM8563::writeReg(uint8_t reg, uint8_t data)
 
 uint8_t BM8563::readReg(uint8_t reg)
 {
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(reg);
     _wire.endTransmission();
-    _wire.requestFrom(0x51, 1);
+    _wire.requestFrom(ADDR, 1);
     return _wire.read();
 }
 
@@ -29,10 +29,10 @@ void BM8563::getDateTime(rtc_date_t &date, rtc_time_t &time)
 {
     uint8_t buf[7] = {0};
 
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x02);
     _wire.endTransmission();
-    _wire.requestFrom(0x51, 7);
+    _wire.requestFrom(ADDR, 7);
     while (_wire.available())
     {
         buf[0] = _wire.read();
@@ -50,7 +50,7 @@ void BM8563::getDateTime(rtc_date_t &date, rtc_time_t &time)
 
 void BM8563::setDateTime(const rtc_date_t &date, const rtc_time_t &time)
 {
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x02);
     writeTime(time);
     writeDate(date);
@@ -81,10 +81,10 @@ void BM8563::getTime(rtc_time_t &time)
 {
     uint8_t buf[3] = {0};
 
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x02);
     _wire.endTransmission();
-    _wire.requestFrom(0x51, 3);
+    _wire.requestFrom(ADDR, 3);
 
     while (_wire.available())
     {
@@ -98,7 +98,7 @@ void BM8563::getTime(rtc_time_t &time)
 
 void BM8563::setTime(const rtc_time_t &time)
 {
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x02);
     writeTime(time);
     _wire.endTransmission();
@@ -109,10 +109,10 @@ void BM8563::getDate(rtc_date_t &date)
 
     uint8_t buf[4] = {0};
 
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x05);
     _wire.endTransmission();
-    _wire.requestFrom(0x51, 4);
+    _wire.requestFrom(ADDR, 4);
 
     while (_wire.available())
     {
@@ -127,7 +127,7 @@ void BM8563::getDate(rtc_date_t &date)
 
 void BM8563::setDate(const rtc_date_t &date)
 {
-    _wire.beginTransmission(0x51);
+    _wire.beginTransmission(ADDR);
     _wire.write(0x05);
     writeDate(date);
     _wire.endTransmission();

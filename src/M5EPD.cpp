@@ -15,11 +15,11 @@
   */
 void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool I2CEnable, bool RTCEnable)
 {
-    if (_is_initialized)
+    if (_initialized)
     {
         return;
     }
-    _is_initialized = true;
+    _initialized = true;
 
     pinMode(M5EPD_MAIN_PWR_PIN, OUTPUT);
     enableMainPower();
@@ -74,11 +74,10 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
   */
 void M5EPD::BatteryADCBegin()
 {
-    if (_is_adc_initialized)
+    if (_adc_chars != nullptr) // initialized
     {
         return;
     }
-    _is_adc_initialized = true;
     adc1_config_width(ADC_WIDTH_BIT_12);
     adc1_config_channel_atten(BAT_ADC_CHANNEL, ADC_ATTEN_DB_11);
     _adc_chars = static_cast<esp_adc_cal_characteristics_t *>(calloc(1, sizeof(esp_adc_cal_characteristics_t)));

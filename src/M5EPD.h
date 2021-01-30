@@ -33,7 +33,7 @@
 class M5EPD
 {
 public:
-    M5EPD() : _is_adc_initialized(false), _is_initialized(false), _adc_chars(nullptr){};
+    M5EPD() : _initialized(false), _adc_chars(nullptr){};
     ~M5EPD()
     {
         if (_adc_chars != nullptr)
@@ -65,8 +65,7 @@ public:
     BM8563 RTC = BM8563(Wire);
 
 private:
-    bool _is_adc_initialized;
-    bool _is_initialized;
+    bool _initialized;
     esp_adc_cal_characteristics_t *_adc_chars;
 };
 

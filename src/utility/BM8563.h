@@ -47,6 +47,7 @@ public:
 
 private:
     TwoWire &_wire;
+    static constexpr int ADDR = 0x51;
     uint8_t Bcd2ToByte(uint8_t Value);
     uint8_t ByteToBcd2(uint8_t Value);
     void writeDate(const rtc_date_t &date);
