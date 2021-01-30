@@ -1,9 +1,5 @@
 #include "BM8563.h"
 
-BM8563::BM8563(TwoWire &theWire) : _wire(theWire)
-{
-}
-
 void BM8563::begin(void)
 {
     // assume _wire.begin() is called
@@ -267,6 +263,7 @@ void BM8563::clearIRQ()
     uint8_t data = readReg(0x01);
     writeReg(0x01, data & 0xf3);
 }
+
 void BM8563::disableIRQ()
 {
     clearIRQ();
