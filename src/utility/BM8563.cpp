@@ -60,8 +60,8 @@ void BM8563::setDateTime(const rtc_date_t &date, const rtc_time_t &time)
 uint8_t BM8563::Bcd2ToByte(uint8_t Value)
 {
     uint8_t tmp = 0;
-    tmp = ((uint8_t)(Value & (uint8_t)0xF0) >> (uint8_t)0x4) * 10;
-    return (tmp + (Value & (uint8_t)0x0F));
+    tmp = ((Value & 0xF0) >> 0x4) * 10;
+    return (tmp + (Value & 0x0F));
 }
 
 uint8_t BM8563::ByteToBcd2(uint8_t Value)
@@ -284,7 +284,7 @@ void BM8563::writeDate(const rtc_date_t &date)
     {
         _wire.write(ByteToBcd2(date.mon) | 0x00);
     }
-    _wire.write(ByteToBcd2((uint8_t)(date.year % 100)));
+    _wire.write(ByteToBcd2(date.year % 100));
 }
 
 void BM8563::writeTime(const rtc_time_t &time)
