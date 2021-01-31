@@ -61,8 +61,8 @@ private:
         ControlStatus2 = 0x01,
         Second = 0x02,
         Day = 0x05,
-        Minute_Alarm = 0x09,
-        Timer_Control = 0x0E,
+        MinuteAlarm = 0x09,
+        TimerControl = 0x0E,
         Timer = 0x0F,
         ClkoutControl = 0x0D
     };

@@ -142,7 +142,7 @@ int BM8563::setAlarmIRQ(int afterSeconds)
         reg_value &= ~(1 << 0);
         writeReg(Register::ControlStatus2, reg_value);
         reg_value = 0x03;
-        writeReg(Register::Timer_Control, reg_value);
+        writeReg(Register::TimerControl, reg_value);
         return -1;
     }
 
@@ -160,7 +160,7 @@ int BM8563::setAlarmIRQ(int afterSeconds)
 
     afterSeconds = (afterSeconds / div) & 0xFF;
     writeReg(Register::Timer, afterSeconds);
-    writeReg(Register::Timer_Control, type_value);
+    writeReg(Register::TimerControl, type_value);
 
     reg_value |= (1 << 0);
     reg_value &= ~(1 << 7);
@@ -198,7 +198,7 @@ int BM8563::setAlarmIRQ(const rtc_time_t &time)
 
     for (int i = 0; i < 4; i++)
     {
-        writeReg(Register::Minute_Alarm + i, out_buf[i]);
+        writeReg(Register::MinuteAlarm + i, out_buf[i]);
     }
     writeReg(Register::ControlStatus2, reg_value);
 
@@ -247,7 +247,7 @@ int BM8563::setAlarmIRQ(const rtc_date_t &date, const rtc_time_t &time)
 
     for (int i = 0; i < 4; i++)
     {
-        writeReg(Register::Minute_Alarm + i, out_buf[i]);
+        writeReg(Register::MinuteAlarm + i, out_buf[i]);
     }
     writeReg(Register::ControlStatus2, reg_value);
 
