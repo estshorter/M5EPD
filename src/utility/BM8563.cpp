@@ -59,8 +59,7 @@ void BM8563::setDateTime(const rtc_date_t &date, const rtc_time_t &time)
 
 uint8_t BM8563::Bcd2ToByte(uint8_t Value)
 {
-    uint8_t tmp = 0;
-    tmp = ((Value & 0xF0) >> 0x4) * 10;
+    uint8_t tmp = ((Value & 0xF0) >> 0x4) * 10;
     return (tmp + (Value & 0x0F));
 }
 
@@ -260,15 +259,13 @@ int BM8563::setAlarmIRQ(const rtc_date_t &date, const rtc_time_t &time)
 
 void BM8563::clearIRQ()
 {
-    uint8_t data = readReg(0x01);
-    writeReg(0x01, data & 0xf3);
+    writeReg(0x01, readReg(0x01) & 0xf3);
 }
 
 void BM8563::disableIRQ()
 {
     clearIRQ();
-    uint8_t data = readReg(0x01);
-    writeReg(0x01, data & 0xfC);
+    writeReg(0x01, readReg(0x01) & 0xfC);
 }
 
 void BM8563::writeDate(const rtc_date_t &date)
