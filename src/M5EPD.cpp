@@ -103,9 +103,8 @@ uint32_t M5EPD::getBatteryVoltage()
         adc_raw_value += adc1_get_raw(BAT_ADC_CHANNEL);
     }
 
-    adc_raw_value = adc_raw_value / ADC_FILTER_SAMPLE;
-    uint32_t voltage = static_cast<uint32_t>(esp_adc_cal_raw_to_voltage(adc_raw_value, _adc_chars) * SCALE_INV);
-    return voltage;
+    adc_raw_value /= ADC_FILTER_SAMPLE;
+    return static_cast<uint32_t>(esp_adc_cal_raw_to_voltage(adc_raw_value, _adc_chars) * SCALE_INV);
 }
 
 /** @brief Update button status
