@@ -47,13 +47,37 @@ public:
 
 private:
     TwoWire &_wire;
-    static constexpr int ADDR = 0x51;
     uint8_t Bcd2ToByte(uint8_t Value);
     uint8_t ByteToBcd2(uint8_t Value);
     void writeDate(const rtc_date_t &date);
     void writeTime(const rtc_time_t &time);
     void readTime(rtc_time_t &time, uint8_t *buf);
     void readDate(rtc_date_t &date, uint8_t *buf);
+
+    static constexpr int Addr = 0x51;
+    enum Register
+    {
+        ControlStatus1 = 0x00,
+        ControlStatus2 = 0x01,
+        Second = 0x02,
+        Day = 0x05,
+        Minute_Alarm = 0x09,
+        Timer_Control = 0x0E,
+        Timer = 0x0F,
+        ClkoutControl = 0x0D
+    };
+
+    class Mask
+    {
+    public:
+        static constexpr int Second = 0x7f;
+        static constexpr int Minute = 0x7f;
+        static constexpr int Hour = 0x3f;
+        static constexpr int Day = 0x3f;
+        static constexpr int Week = 0x07;
+        static constexpr int Mon = 0x1f;
+        static constexpr int Year = 0xff;
+    };
 };
 
 #endif
