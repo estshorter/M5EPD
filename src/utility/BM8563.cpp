@@ -171,7 +171,7 @@ int BM8563::setAlarmIRQ(int afterSeconds)
 int BM8563::setAlarmIRQ(const rtc_time_t &time)
 {
     uint8_t irq_enable = false;
-    uint8_t out_buf[4] = {0x80, 0x80, 0x00, 0x00};
+    uint8_t out_buf[4] = {0x80, 0x80, 0x80, 0x80}; //alarm disabled
 
     if (time.min >= 0)
     {
@@ -208,7 +208,7 @@ int BM8563::setAlarmIRQ(const rtc_time_t &time)
 int BM8563::setAlarmIRQ(const rtc_date_t &date, const rtc_time_t &time)
 {
     uint8_t irq_enable = false;
-    uint8_t out_buf[4] = {0x80, 0x80, 0x80, 0x80};
+    uint8_t out_buf[4] = {0x80, 0x80, 0x80, 0x80}; //alarm disabled
 
     if (time.min >= 0)
     {
