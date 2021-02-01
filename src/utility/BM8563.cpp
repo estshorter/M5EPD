@@ -301,12 +301,6 @@ void BM8563::readDate(rtc_date_t &date, uint8_t *buf)
     date.week = Bcd2ToByte(buf[1] & Mask::Week);
     date.mon = Bcd2ToByte(buf[2] & Mask::Mon);
 
-    if (buf[2] & 0x80)
-    {
-        date.year = 1900 + Bcd2ToByte(buf[3] /* & Mask::Year*/);
-    }
-    else
-    {
-        date.year = 2000 + Bcd2ToByte(buf[3] /* & Mask::Year*/);
-    }
+    date.year = buf[2] & 0x80 ? 1900 : 2000; // century
+    date.year += Bcd2ToByte(buf[3]);
 }
