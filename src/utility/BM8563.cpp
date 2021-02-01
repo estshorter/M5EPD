@@ -139,7 +139,7 @@ int BM8563::setAlarmIRQ(int afterSeconds)
 
     if (afterSeconds < 0)
     {
-        reg_value &= ~(1 << 0);
+        reg_value &= ~1;
         writeReg(Register::ControlStatus2, reg_value);
         reg_value = 0x03;
         writeReg(Register::TimerControl, reg_value);
