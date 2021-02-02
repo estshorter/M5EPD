@@ -254,12 +254,12 @@ int BM8563::setAlarmIRQ(const rtc_date_t &date, const rtc_time_t &time)
     return irq_enable ? 1 : 0;
 }
 
-void BM8563::clearIRQ()
+void BM8563::clearIRQ(void)
 {
     writeReg(Register::ControlStatus2, readReg(Register::ControlStatus2) & 0xf3);
 }
 
-void BM8563::disableIRQ()
+void BM8563::disableIRQ(void)
 {
     clearIRQ();
     writeReg(Register::ControlStatus2, readReg(Register::ControlStatus2) & 0xfC);

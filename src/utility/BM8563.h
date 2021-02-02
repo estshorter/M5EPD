@@ -27,7 +27,7 @@ class BM8563
 public:
     BM8563(TwoWire &wire = Wire) : _wire(wire){};
 
-    void begin();
+    void begin(void);
     void writeReg(uint8_t reg, uint8_t data);
     uint8_t readReg(uint8_t reg);
 
@@ -42,8 +42,8 @@ public:
     int setAlarmIRQ(int afterSeconds);
     int setAlarmIRQ(const rtc_time_t &time);
     int setAlarmIRQ(const rtc_date_t &date, const rtc_time_t &time);
-    void clearIRQ();
-    void disableIRQ();
+    void clearIRQ(void);
+    void disableIRQ(void);
 
 private:
     TwoWire &_wire;
