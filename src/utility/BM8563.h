@@ -15,9 +15,9 @@ typedef struct RTC_Time
 typedef struct RTC_Date
 {
     int8_t week;
-    int8_t mon;
+    int8_t mon; // [1, 12]
     int8_t day;
-    int16_t year;
+    int16_t year; // AD
     RTC_Date() : week(), mon(), day(), year() {}
     RTC_Date(int8_t w, int8_t m, int8_t d, int16_t y) : week(w), mon(m), day(d), year(y) {}
 } rtc_date_t;
