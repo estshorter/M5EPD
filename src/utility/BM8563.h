@@ -67,9 +67,8 @@ private:
         ClkoutControl = 0x0D
     };
 
-    class Mask
+    struct Mask
     {
-    public:
         static constexpr int Second = 0x7f;
         static constexpr int Minute = 0x7f;
         static constexpr int Hour = 0x3f;
