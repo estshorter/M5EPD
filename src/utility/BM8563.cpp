@@ -1,11 +1,15 @@
 #include "BM8563.h"
 
-void BM8563::begin(void)
+bool BM8563::begin(int sda, int scl, uint32_t frequency)
 {
-    // assume _wire.begin() is called
+    if (!_wire.begin(sda, scl, frequency))
+    {
+        return false;
+    }
     writeReg(Register::ControlStatus1, 0x00);
     writeReg(Register::ControlStatus2, 0x00);
     writeReg(Register::ClkoutControl, 0x00);
+    return true;
 }
 
 void BM8563::writeReg(uint8_t reg, uint8_t data)

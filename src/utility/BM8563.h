@@ -27,7 +27,7 @@ class BM8563
 public:
     BM8563(TwoWire &wire = Wire) : _wire(wire){};
 
-    void begin(void);
+    bool begin(int sda = -1, int scl = -1, uint32_t frequency = 0);
     void writeReg(uint8_t reg, uint8_t data);
     uint8_t readReg(uint8_t reg);
 

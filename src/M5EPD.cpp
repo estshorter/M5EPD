@@ -49,7 +49,7 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
         SD.begin(4, SPI, 20000000);
     }
 
-    if (I2CEnable == true || RTCEnable == true)
+    if (I2CEnable == true)
     {
         Wire.begin(21, 22, 400000);
     }
@@ -66,7 +66,7 @@ void M5EPD::begin(bool SDEnable, bool SerialEnable, bool BatteryADCEnable, bool 
 
     if (RTCEnable == true)
     {
-        RTC.begin();
+        RTC.begin(21, 22, 400000);
     }
 }
 
