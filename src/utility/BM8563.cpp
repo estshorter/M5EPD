@@ -8,7 +8,7 @@ bool BM8563::begin(int sda, int scl, uint32_t frequency)
     }
     writeReg(Register::ControlStatus1, 0x00);
     writeReg(Register::ControlStatus2, 0x00);
-    writeReg(Register::ClkoutControl, 0x00);
+    writeReg(Register::ClkOutControl, 0x00);
     return true;
 }
 
