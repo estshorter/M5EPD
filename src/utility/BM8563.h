@@ -27,17 +27,41 @@ class BM8563
 public:
     BM8563(TwoWire &wire = Wire) : _wire(wire){};
 
-    bool begin(int sda = -1, int scl = -1, uint32_t frequency = 0);
+    void begin(int sda = -1, int scl = -1, uint32_t frequency = 0);
     void writeReg(uint8_t reg, uint8_t data);
     uint8_t readReg(uint8_t reg);
 
-    void setTime(const rtc_time_t &time);
-    void setDate(const rtc_date_t &date);
-    void setDateTime(const rtc_date_t &date, const rtc_time_t &time);
+    void setTime(const rtc_time_t *time);
+    void setDate(const rtc_date_t *date);
+    void setDateTime(const rtc_date_t *date, const rtc_time_t *time);
+    void setTime(const rtc_time_t &time)
+    {
+        setTime(&time);
+    }
+    void setDate(const rtc_date_t &date)
+    {
+        setDate(&date);
+    }
+    void setDateTime(const rtc_date_t &date, const rtc_time_t &time)
+    {
+        setDateTime(&date, &time);
+    }
 
-    void getTime(rtc_time_t &time);
-    void getDate(rtc_date_t &date);
-    void getDateTime(rtc_date_t &date, rtc_time_t &time);
+    void getTime(rtc_time_t *time);
+    void getDate(rtc_date_t *date);
+    void getDateTime(rtc_date_t *date, rtc_time_t *time);
+    void getTime(rtc_time_t &time)
+    {
+        getTime(&time);
+    }
+    void getDate(rtc_date_t &date)
+    {
+        getDate(&date);
+    }
+    void getDateTime(rtc_date_t &date, rtc_time_t &time)
+    {
+        getDateTime(&date, &time);
+    }
 
     int setAlarmIRQ(int afterSeconds);
     int setAlarmIRQ(const rtc_time_t &time);
@@ -49,10 +73,10 @@ private:
     TwoWire &_wire;
     uint8_t Bcd2ToByte(uint8_t Value);
     uint8_t ByteToBcd2(uint8_t Value);
-    void writeDate(const rtc_date_t &date);
-    void writeTime(const rtc_time_t &time);
-    void readTime(rtc_time_t &time, uint8_t *buf);
-    void readDate(rtc_date_t &date, uint8_t *buf);
+    void readDate(rtc_date_t *date, uint8_t *buf);
+    void readTime(rtc_time_t *time, uint8_t *buf);
+    void writeDate(const rtc_date_t *date);
+    void writeTime(const rtc_time_t *time);
 
     static constexpr int Addr = 0x51;
     enum Register
@@ -74,7 +98,7 @@ private:
         static constexpr int Hour = 0x3f;
         static constexpr int Day = 0x3f;
         static constexpr int Week = 0x07;
-        static constexpr int Mon = 0x1f;
+        static constexpr int Month = 0x1f;
         static constexpr int Year = 0xff;
     };
 };
