@@ -41,7 +41,7 @@ public:
             free(_adc_chars);
         }
     }
-    void begin(bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RTCEnable = true);
+    void begin(bool touchEnable = true, bool SDEnable = true, bool SerialEnable = true, bool BatteryADCEnable = true, bool I2CEnable = false, bool RTCEnable = true);
     void update();
     void enableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 1); }
     void disableEXTPower() { digitalWrite(M5EPD_EXT_PWR_EN_PIN, 0); }
